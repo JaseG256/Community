@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service(value = "roleServicer")
 public class RoleServiceImpl implements RoleService{
 
     @Autowired
