@@ -1,6 +1,5 @@
 package com.Msa.communityservlet.model.audit;
 
-import com.Msa.communityservlet.model.DateAudit;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;

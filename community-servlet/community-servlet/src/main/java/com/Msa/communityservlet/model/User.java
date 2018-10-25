@@ -1,5 +1,7 @@
 package com.Msa.communityservlet.model;
 
+import com.Msa.communityservlet.model.audit.DateAudit;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

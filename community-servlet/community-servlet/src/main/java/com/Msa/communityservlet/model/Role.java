@@ -17,11 +17,6 @@ public class Role  {
     @Column(length = 60)
     private RoleName name;
 
-    enum RoleName {
-        ROLE_USER,
-        ROLE_ADMIN
-    }
-
 //    ManyToMany()
 
     public Role() {
