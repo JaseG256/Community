@@ -1,11 +1,13 @@
 import { Route, RouterModule, Routes } from '@angular/router';
-import { UserComponent } from '../user/user.component';
-import { LoginComponent } from '../login/login.component';
-import { HomeComponent } from '../home/home.component';
-import { UserDetailsComponent } from '../user-details/user-details.component';
-import { RegisterComponent } from '../register/register.component';
-import { MyProfileComponent } from '../my-profile/my-profile.component';
+
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { RegisterComponent } from './register/register.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 const indexRoute: Route = {
     path: '', component: HomeComponent
@@ -45,6 +47,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
+      CommonModule,
         RouterModule.forRoot(
             routes,
         // {enableTracing: true}

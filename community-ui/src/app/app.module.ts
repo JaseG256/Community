@@ -13,6 +13,7 @@ import { UserService } from './user/user.service';
 import { HomeComponent } from './home/home.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule,
+    
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
