@@ -10,13 +10,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './user/user.service';
+import { HomeComponent } from './home/home.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    UserComponent
+    UserComponent,
+    HomeComponent,
+    UserDetailsComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
