@@ -35,7 +35,7 @@ public class FileController {
 
         String fileDownLoadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
-                .path(dbFile.getId())
+                .path(dbFile.getFileName())
                 .toUriString();
 
         return new UploadFileResponse(dbFile.getFileName(), fileDownLoadUri,

@@ -61,11 +61,15 @@ public class UserServiceImplTest {
     private User user;
     private List<User> userList;
     private Long id;
+    private String username;
+    private String email;
 
     @Before
     public void setUp() {
-        user = new User("jason", "jason@yahoo.com", "jumpshot");
         id = 1L;
+        username = "jason";
+        email = "jason@yahoo.com";
+        user = new User(username, email, "jumpshot");
         user.setId(id);
         userList = Collections.singletonList(user);
     }
@@ -97,29 +101,93 @@ public class UserServiceImplTest {
 
     @Test
     public void delete() {
+        Mockito.when(userRepository.findById(id))
+                .thenReturn(Optional.of(user));
+        userService.delete(id);
+        assertThat(userRepository.findById(id), not(equalTo(user)));
     }
 
     @Test
     public void findByUsername() {
+        Mockito.when(userRepository.findByUsername(user.getUsername()))
+                .thenReturn(user);
+        String foundUsername = "jason";
+        User foundUser = userService.findByUsername(foundUsername);
+        assertThat(foundUser.getUsername(), equalTo(foundUsername));
     }
 
     @Test
     public void findByEmail() {
+        Mockito.when(userRepository.findByEmail(user.getEmail()))
+                .thenReturn(Optional.of(user));
+        String foundEmail = "jason@yahoo.com";
+        User foundUser = (userService.findByEmail(email).isPresent())
+                ? userService.findByEmail(foundEmail).get() : null;
+        assertThat(foundUser.getEmail(), equalTo(foundEmail));
     }
 
     @Test
-    public void findByUsernameOrEmail() {
+    public void findByUsernameOrEmailTestUsername() {
+        Mockito.when(userRepository.findByUsername(username))
+                .thenReturn(user);
+        String foundUsername = "jason";
+        User foundUser = userService.findByUsername(foundUsername);
+        assertThat(foundUser.getUsername(), equalTo(foundUsername));
+    }
+
+    @Test
+    public void findByUsernameOrEmailTestEmail() {
+        Mockito.when(userRepository.findByEmail(email))
+                .thenReturn(Optional.of(user));
+        String foundEmail = "jason@yahoo.com";
+        User foundUser = userService.findByEmail(foundEmail).get();
+        assertThat(foundUser.getEmail(), equalTo(foundEmail));
     }
 
     @Test
     public void findByIdIn() {
+        List<Long> idList = Collections.singletonList(user.getId());
+        Mockito.when(userRepository.findByIdIn(idList))
+                .thenReturn(userList);
+        Long foundId = 1L;
+        List<Long> foundUserIdList = Collections.singletonList(foundId);
+        List<User> foundUserList = userService.findByIdIn(foundUserIdList);
+        assertThat(foundUserList, hasItems(user));
     }
 
     @Test
-    public void existsByUsername() {
+    public void existsByUsernameTrue() {
+        Mockito.when(userRepository.existsByUsername(username))
+                .thenReturn(true);
+        String usernameToCheck = "jason";
+        Boolean usernameResponse = userService.existsByUsername(usernameToCheck);
+        assertTrue(usernameResponse);
     }
 
     @Test
-    public void existsByEmail() {
+    public void existsByUsernameFalse() {
+        Mockito.when(userRepository.existsByUsername(username))
+                .thenReturn(true);
+        String usernameToCheck = "jimmy";
+        Boolean usernameResponse = userService.existsByUsername(usernameToCheck);
+        assertFalse(usernameResponse);
+    }
+
+    @Test
+    public void existsByEmailTrue() {
+        Mockito.when(userRepository.existsByEmail(email))
+                .thenReturn(true);
+        String emailToCheck = "jason@yahoo.com";
+        Boolean usernameResponse = userService.existsByUsername(emailToCheck);
+        assertTrue(usernameResponse);
+    }
+
+    @Test
+    public void existsByEmailFalse() {
+        Mockito.when(userRepository.existsByUsername(email))
+                .thenReturn(true);
+        String emailToCheck = "jason@gmail.com";
+        Boolean usernameResponse = userService.existsByUsername(emailToCheck);
+        assertFalse(usernameResponse);
     }
 }

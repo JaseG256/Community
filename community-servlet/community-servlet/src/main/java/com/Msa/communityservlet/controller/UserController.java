@@ -39,22 +39,25 @@ public class UserController {
         return userSummary;
     }
 
-    //    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(path = "/user/{id}")
     public Optional<User> findOne(@PathVariable("id") Long id){
         return userService.getById(id);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(path="/users/{username}")
     public User findByUserName(@RequestParam("username") String userName) {
         return userService.findByUsername(userName);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(path = "users/email/{email}")
     public Optional<User> findByEmail(@RequestParam("email") String email) {
         return userService.findByEmail(email);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PutMapping(path = "/{id}")
     public User update(@PathVariable("id") Long id, @RequestBody User user){
         user.setId(id);
@@ -73,6 +76,7 @@ public class UserController {
         return new UserIdentityAvailability(isAvailable);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping(path ="/user/{id}")
     public void delete(@PathVariable("id") Long id) {
         userService.delete(id);

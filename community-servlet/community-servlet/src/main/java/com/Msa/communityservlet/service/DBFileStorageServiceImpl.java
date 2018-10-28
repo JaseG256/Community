@@ -35,16 +35,18 @@ public class DBFileStorageServiceImpl implements DBFileStorageService {
             }
 
             DBFile dbFile = new DBFile(fileName, file.getContentType(), file.getBytes());
-            long id = currentUser.getId();
-            Optional<User> user = userService.getById(id);
-            dbFile.setUser(user.get());
-            user.get().setAvatar(dbFile);
-
+            assignToUser(dbFile, currentUser);
             return dbFileRepository.save(dbFile);
-
         } catch (IOException e) {
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", e);
         }
+    }
+
+    private void assignToUser(DBFile dbFile, UserPrincipal currentUser) {
+        long id = currentUser.getId();
+        User user  = userService.getById(id).get();
+        dbFile.setUser(user);
+        user.setAvatar(dbFile);
     }
 
     @Override
