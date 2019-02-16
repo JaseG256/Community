@@ -98,8 +98,8 @@ public class UserControllerTest {
         mvc.perform(get("api/user/" + id).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$", hasSize(equalTo(1))));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+//                .andExpect(jsonPath("$", hasSize(equalTo(1))));
 //                .andExpect(jsonPath("$[0].username", is("jason")));
     }
 

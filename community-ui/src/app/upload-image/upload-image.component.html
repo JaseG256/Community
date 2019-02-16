@@ -1,0 +1,3 @@
+<input style="display: none" type="file" (change)="onFileSelected($event)" #fileInput>
+<button mat-button (click)="fileInput.click()">Pick File</button>
+<button mat-button (click)="onUpload()">Upload</button>

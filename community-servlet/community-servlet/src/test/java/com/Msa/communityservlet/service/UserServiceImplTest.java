@@ -178,16 +178,16 @@ public class UserServiceImplTest {
         Mockito.when(userRepository.existsByEmail(email))
                 .thenReturn(true);
         String emailToCheck = "jason@yahoo.com";
-        Boolean usernameResponse = userService.existsByUsername(emailToCheck);
+        Boolean usernameResponse = userService.existsByEmail(emailToCheck);
         assertTrue(usernameResponse);
     }
 
     @Test
     public void existsByEmailFalse() {
-        Mockito.when(userRepository.existsByUsername(email))
-                .thenReturn(true);
+        Mockito.when(userRepository.existsByEmail(email))
+        .thenReturn(true);
         String emailToCheck = "jason@gmail.com";
-        Boolean usernameResponse = userService.existsByUsername(emailToCheck);
+        Boolean usernameResponse = userService.existsByEmail(emailToCheck);
         assertFalse(usernameResponse);
-    }
-}
+        }
+ }

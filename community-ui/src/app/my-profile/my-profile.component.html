@@ -1,3 +1,17 @@
-<p>
-  my-profile works!
-</p>
+<mat-card class="user-profile">
+    <mat-card-header>
+        <img mat-card-avatar src="http://localhost:8080/downloadFile/Jason's%20pic.jpg">
+        <mat-card-title>{{user.username | uppercase}}</mat-card-title>
+        <mat-card-subtitle>Representative</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="http://localhost:8080/downloadFile/Jason's%20pic.jpg">
+    <mat-card-content>
+        <p>
+          What's the Deal
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <app-upload-image></app-upload-image>
+        <button mat-button (click)="logout()">Logout</button>
+      </mat-card-actions>
+    </mat-card>

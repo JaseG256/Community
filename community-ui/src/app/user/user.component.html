@@ -1,1 +1,35 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <!-- <span><img src="../downloads/PantherLogo.jpeg"></span> -->
+    <span class="example-fill-remaining-space"></span>
+    <span class="align-center"></span>
+    <span class="example-spacer"></span>
 
+    <button mat-button>About</button>
+    <button mat-button>Contact</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="example-container mat-elevation-z8">
+  <mat-table #table matSort matPaginator [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let columns; columns: displayedColumns;" (click)="showDetails(row.username)"></mat-row>
+  </mat-table>
+
+  <mat-paginator [length]="5" [pageSize]="3" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+</div>

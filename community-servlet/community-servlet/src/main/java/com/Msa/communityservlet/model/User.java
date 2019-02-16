@@ -1,9 +1,15 @@
 package com.Msa.communityservlet.model;
 
 import com.Msa.communityservlet.model.audit.DateAudit;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,7 +21,7 @@ import java.util.Set;
                 "email"
         })
 })
-public class User extends DateAudit {
+public class User extends DateAudit{
 
     @Id
     @Column
@@ -42,6 +48,22 @@ public class User extends DateAudit {
             cascade = CascadeType.ALL,
             mappedBy = "user")
     private DBFile avatar;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_courses",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private List<Course> courses = new ArrayList<>();
+
+//    @OneToMany(
+//            mappedBy = "user",
+//            cascade = CascadeType.ALL,
+//            fetch = FetchType.EAGER,
+//            orphanRemoval = true
+//    )
+//    @Fetch(FetchMode.SELECT)
+//    @BatchSize(size = 30)
+//    private List<VoteForUser> votes = new ArrayList<>();
 
     public User() { }
 
@@ -111,6 +133,27 @@ public class User extends DateAudit {
 
     public void setAvatar(DBFile avatar) { this.avatar = avatar; }
 
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+//    public Poll getPoll() {
+//        return poll;
+//    }
+//
+//    public void setPoll(Poll poll) {
+//        this.poll = poll;
+//    }
+
+    //    @Override
+//    public int compareTo(List<VoteForUser> o) {
+//        return Integer.compare(votes.size(), o.size());
+//    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -118,4 +161,5 @@ public class User extends DateAudit {
                 ", name='" + username + '\'' +
                 '}';
     }
+
 }

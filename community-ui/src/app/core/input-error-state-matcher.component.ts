@@ -1,6 +1,10 @@
 import { ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
+import { Component } from '@angular/core';
 
+@Component({
+    
+})
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -8,6 +12,4 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
         return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
     }
 }
-
-
 

@@ -1,3 +1,20 @@
-<p>
-  user-details works!
-</p>
+<div *ngIf="user">
+
+    <mat-card class="user-details">
+        <mat-card-header>
+            <img mat-card-avatar src="http://localhost:8080/downloadFile/bccaee47-cc93-4e1e-b0b0-0a1f3a3386b0">
+            <mat-card-title>{{user.username | uppercase}}</mat-card-title>
+            <mat-card-subtitle>Representative</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="http://localhost:8080/downloadFile/db6bc698-0d50-4d45-a557-feda0ed62959">
+        <mat-card-content>
+            <p>
+              What's Happening!
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+</div>

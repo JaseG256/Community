@@ -12,8 +12,7 @@ export class UserComponent implements OnInit, AfterViewInit {
 
   displayedColumns = ['id', 'username', 'email'];
   dataSource = new MatTableDataSource<User>();
-  users: User[];
-  selectedUser: User;
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -22,16 +21,8 @@ export class UserComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.userService.getUsers()
     .subscribe(data => {
-      this.users = data;
-    });
-    this.userService.getUsers()
-    .subscribe(data => {
       this.dataSource.data = data;
     });
-  }
-
-  onSelect(user: User) {
-    this.selectedUser = user;
   }
 
   ngAfterViewInit() {
@@ -44,7 +35,7 @@ export class UserComponent implements OnInit, AfterViewInit {
   deleteUser(user: User) {
     this.userService.deleteUser(user)
     .subscribe(data => {
-      this.users = this.users.filter(u => u !== user);
+      this.dataSource.data = this.dataSource.data.filter(u => u !== user);
     });
   }
 

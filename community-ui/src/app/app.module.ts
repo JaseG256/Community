@@ -6,7 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { CustomMaterialModule } from './core/material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './user/user.service';
@@ -14,6 +14,9 @@ import { HomeComponent } from './home/home.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthService } from './core/auth.service';
+import { Interceptor } from './core/interceptor';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,8 @@ import { AppRoutingModule } from './app-routing.module';
     UserComponent,
     HomeComponent,
     UserDetailsComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    UploadImageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,13 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     
   ],
-  providers: [UserService],
+  providers: [UserService,AuthService,
+  {
+     provide: HTTP_INTERCEPTORS,
+    useClass: Interceptor,
+    multi: true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
