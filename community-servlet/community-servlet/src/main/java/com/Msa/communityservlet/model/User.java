@@ -55,16 +55,6 @@ public class User extends DateAudit{
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Course> courses = new ArrayList<>();
 
-//    @OneToMany(
-//            mappedBy = "user",
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.EAGER,
-//            orphanRemoval = true
-//    )
-//    @Fetch(FetchMode.SELECT)
-//    @BatchSize(size = 30)
-//    private List<VoteForUser> votes = new ArrayList<>();
-
     public User() { }
 
     public User(String username, String email, String password) {
@@ -140,19 +130,6 @@ public class User extends DateAudit{
     public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
-
-//    public Poll getPoll() {
-//        return poll;
-//    }
-//
-//    public void setPoll(Poll poll) {
-//        this.poll = poll;
-//    }
-
-    //    @Override
-//    public int compareTo(List<VoteForUser> o) {
-//        return Integer.compare(votes.size(), o.size());
-//    }
 
     @Override
     public String toString() {

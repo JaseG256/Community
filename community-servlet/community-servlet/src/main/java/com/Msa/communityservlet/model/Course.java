@@ -83,4 +83,11 @@ public class Course extends UserDateAudit {
                 .reduce((user, user2) -> (user.getId().equals(userId)) ? user : user2)
                 .orElseThrow(() -> new BadRequestException("This user does not exist"));
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Course [courseName=%s, description=%s]", courseName, description
+        );
+    }
 }

@@ -4,11 +4,13 @@ import com.Msa.communityservlet.model.Course;
 import com.Msa.communityservlet.repository.CourseRepository;
 import com.Msa.communityservlet.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Service(value = "courseServicer")
 public class CourseServiceImpl implements CourseService {
 
     @Autowired
