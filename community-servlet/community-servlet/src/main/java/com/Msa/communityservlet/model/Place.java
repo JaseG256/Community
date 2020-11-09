@@ -51,6 +51,10 @@ public class Place extends UserDateAudit {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNameOfPlace() {
         return nameOfPlace;
     }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service(value = "placeServicer")
 public class PlaceServiceImpl implements PlaceService {
 
     private final PlaceRepository placeRepository;
@@ -43,11 +43,16 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public Optional<Place> findByNameOfPlace(String nameOfPlace) {
-        return null;
+        return placeRepository.findByNameOfPlace(nameOfPlace);
     }
 
     @Override
     public Optional<Place> findByAddress(Address address) {
-        return null;
+        return placeRepository.findByAddress(address);
+    }
+
+    @Override
+    public PlaceRepository getRepository() {
+        return placeRepository;
     }
 }
