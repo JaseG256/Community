@@ -26,7 +26,7 @@ public class Poll extends UserDateAudit {
     private String question;
 
     @OneToMany(
-            mappedBy = "polls",
+            mappedBy = "poll",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             orphanRemoval = true
