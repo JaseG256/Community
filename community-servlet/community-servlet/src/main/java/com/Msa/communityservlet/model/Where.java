@@ -1,6 +1,7 @@
 package com.Msa.communityservlet.model;
 
 import com.Msa.communityservlet.model.audit.DateAudit;
+import com.Msa.communityservlet.model.audit.UserDateAudit;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -11,55 +12,42 @@ import java.util.List;
 
 @Entity
 @Table(name = "where")
-public class Where extends DateAudit {
+public class Where extends UserDateAudit {
 
     @Id
+    @Column
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
     @Column
-    private String name;
+    private String nameOfWhere;
 
-    //    @OneToOne(
-//            fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL,
-//            mappedBy = "where"
-//    )
-    private Address address;
-
-    @OneToMany(
-            mappedBy = "where",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            orphanRemoval = true
-    )
-    @Fetch(FetchMode.SELECT)
-    @BatchSize(size = 30)
-    private List<FamilyEvent> familyEvents;
+//    @Column
+//    private Address address;
 
     public Where() {
     }
 
-    public Where(String name) {
-        this.name = name;
+    public Where(String nameOfWhere) {
+        this.nameOfWhere = nameOfWhere;
     }
 
-    public Where(String name, Address address) {
-        this.name = name;
-        this.address = address;
-    }
+//    public Where(String nameOfWhere, Address address) {
+//        this.nameOfWhere = nameOfWhere;
+//        this.address = address;
+//    }
 
     public String getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getnameOfWhere() {
+        return nameOfWhere;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setnameOfWhere(String nameOfWhere) {
+        this.nameOfWhere = nameOfWhere;
     }
 
 //    public Address getAddress() {
