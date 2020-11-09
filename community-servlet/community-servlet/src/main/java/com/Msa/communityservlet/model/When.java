@@ -27,6 +27,11 @@ public class When implements Serializable {
         this.endDate = endDate;
     }
 
+    public When(LocalDate startDate, LocalTime startTime) {
+        this.startDate = startDate;
+        this.startTime = startTime;
+    }
+
     public When(LocalDate startDate, LocalDate endDate, LocalTime startTime) {
         this.startDate = startDate;
         this.endDate = endDate;
