@@ -1,5 +1,6 @@
 package com.Msa.communityservlet.service;
 
+import com.Msa.communityservlet.config.ServiceUnitTestConfig;
 import com.Msa.communityservlet.model.User;
 import com.Msa.communityservlet.repository.UserRepository;
 import org.junit.Before;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -40,22 +43,16 @@ import java.util.Optional;
 
 import static org.junit.Assert.*;
 
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
+@ContextConfiguration(classes = ServiceUnitTestConfig.class)
 public class UserServiceImplTest {
 
-    @TestConfiguration
-    static class UserServiceImplTestContextConfiguration {
-
-        @Bean
-        UserService userService() {
-            return new UserServiceImpl();
-        }
-    }
 
     @Autowired
     private UserService userService;
 
-    @MockBean
+    @Autowired
     private UserRepository userRepository;
 
     private User user;

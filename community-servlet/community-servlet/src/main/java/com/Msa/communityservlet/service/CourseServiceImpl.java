@@ -13,12 +13,15 @@ import java.util.stream.Collectors;
 @Service(value = "courseServicer")
 public class CourseServiceImpl implements CourseService {
 
-    @Autowired
-    private CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-    
+    private final UserRepository userRepository;
+
+    public CourseServiceImpl(CourseRepository courseRepository, UserRepository userRepository) {
+        this.courseRepository = courseRepository;
+        this.userRepository = userRepository;
+    }
+
     @Override
     public Optional<Course> findByCourseName(String courseName) {
         return courseRepository.findByCourseName(courseName);

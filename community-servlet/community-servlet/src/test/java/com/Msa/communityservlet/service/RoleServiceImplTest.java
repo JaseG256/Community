@@ -1,5 +1,6 @@
 package com.Msa.communityservlet.service;
 
+import com.Msa.communityservlet.config.ServiceUnitTestConfig;
 import com.Msa.communityservlet.model.Role;
 import com.Msa.communityservlet.model.RoleName;
 import com.Msa.communityservlet.model.User;
@@ -20,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.anyOf;
@@ -36,22 +39,15 @@ import java.util.*;
 
 import static org.junit.Assert.*;
 
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
+@ContextConfiguration(classes = ServiceUnitTestConfig.class)
 public class RoleServiceImplTest {
-
-    @TestConfiguration
-    static class RoleServiceImplTestContextConfiguration {
-
-        @Bean
-        RoleService roleService() {
-            return new RoleServiceImpl();
-        }
-    }
 
     @Autowired
     private RoleService roleService;
 
-    @MockBean
+    @Autowired
     private RoleRepository roleRepository;
 
     private Role role;

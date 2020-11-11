@@ -18,12 +18,16 @@ import java.util.Optional;
 @Service(value = "fileServicer")
 public class DBFileStorageServiceImpl implements DBFileStorageService {
 
-    @Autowired
-    DBFileRepository dbFileRepository;
 
-    @Autowired
+    private final DBFileRepository dbFileRepository;
+
     @Qualifier("userServicer")
-    UserService userService;
+    private final UserService userService;
+
+    public DBFileStorageServiceImpl(DBFileRepository dbFileRepository, UserService userService) {
+        this.dbFileRepository = dbFileRepository;
+        this.userService = userService;
+    }
 
     @Override
     public DBFile storeFile(MultipartFile file, UserPrincipal currentUser) {

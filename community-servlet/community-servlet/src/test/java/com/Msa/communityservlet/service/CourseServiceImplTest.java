@@ -1,5 +1,6 @@
 package com.Msa.communityservlet.service;
 
+import com.Msa.communityservlet.config.ServiceUnitTestConfig;
 import com.Msa.communityservlet.model.Course;
 import com.Msa.communityservlet.model.User;
 import com.Msa.communityservlet.repository.CourseRepository;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -22,23 +25,18 @@ import java.util.function.Supplier;
 
 import static org.junit.Assert.*;
 
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
+@ContextConfiguration(classes = ServiceUnitTestConfig.class)
 public class CourseServiceImplTest {
-
-    @TestConfiguration
-    static class CourseServiceTestContextConfiguration {
-
-        @Bean
-        CourseService courseService() { return new CourseServiceImpl(); }
-    }
 
     @Autowired
     private CourseService courseService;
 
-    @MockBean
+    @Autowired
     private CourseRepository courseRepository;
 
-    @MockBean
+    @Autowired
     private UserRepository userRepository;
 
     private Course firstCourse, secondCourse;

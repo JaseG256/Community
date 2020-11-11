@@ -17,7 +17,7 @@ public class CourseController {
     @Qualifier("courseServicer")
     private CourseService courseService;
 
-    @GetMapping("/students/{studentId}/courses")
+    @GetMapping("/students/{studentId}")
     public List<Course> retrieveCourseListForStudent(@PathVariable Long studentId) {
         return courseService.retrieveCourseListForStudent(studentId);
     }

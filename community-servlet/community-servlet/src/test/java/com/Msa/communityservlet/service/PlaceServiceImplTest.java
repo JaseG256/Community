@@ -1,5 +1,6 @@
 package com.Msa.communityservlet.service;
 
+import com.Msa.communityservlet.config.ServiceUnitTestConfig;
 import com.Msa.communityservlet.exception.AppException;
 import com.Msa.communityservlet.model.Address;
 import com.Msa.communityservlet.model.Place;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
@@ -20,25 +23,27 @@ import static org.junit.Assert.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
+@ContextConfiguration(classes = ServiceUnitTestConfig.class)
 public class PlaceServiceImplTest {
 
-    @TestConfiguration
-    static class PlaceServiceImplTestContextConfiguration {
-
-        @Autowired
-        PlaceRepository placeRepository;
-
-        @Bean
-        PlaceService placeService() {
-            return new PlaceServiceImpl(placeRepository);
-        }
-    }
+//    @TestConfiguration
+//    static class PlaceServiceImplTestContextConfiguration {
+//
+//        @Autowired
+//        PlaceRepository placeRepository;
+//
+//        @Bean
+//        PlaceService placeService() {
+//            return new PlaceServiceImpl(placeRepository);
+//        }
+//    }
 
     @Autowired
     PlaceService placeService;
 
-    @MockBean
+    @Autowired
     PlaceRepository placeRepositoryMock;
 
     String nameOfPlace, anotherName, exceptionMessage, firstName, secondName, firstStreetNumber, secondStreetNumber,

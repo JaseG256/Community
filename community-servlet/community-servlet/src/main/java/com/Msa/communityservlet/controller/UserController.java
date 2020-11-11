@@ -21,9 +21,12 @@ import java.util.Optional;
 //@RequestMapping("/users")
 public class UserController {
 
-    @Autowired
     @Qualifier("userServicer")
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping(path = "/user/add")
     public User create(@RequestBody User user){

@@ -50,8 +50,4 @@ public class FamilyEventServiceImpl implements FamilyEventService {
         return eventRepository.findByWhen(when);
     }
 
-    @Override
-    public FamilyEventRepository getRepository() {
-        return eventRepository;
-    }
 }

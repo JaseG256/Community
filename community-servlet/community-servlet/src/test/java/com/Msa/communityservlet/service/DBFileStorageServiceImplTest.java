@@ -1,5 +1,6 @@
 package com.Msa.communityservlet.service;
 
+import com.Msa.communityservlet.config.ServiceUnitTestConfig;
 import com.Msa.communityservlet.model.DBFile;
 import com.Msa.communityservlet.model.User;
 import com.Msa.communityservlet.repository.DBFileRepository;
@@ -15,6 +16,8 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,29 +46,22 @@ import java.util.Optional;
 
 import static org.junit.Assert.*;
 
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
+@ContextConfiguration(classes = ServiceUnitTestConfig.class)
 public class DBFileStorageServiceImplTest {
 
-    @TestConfiguration
-    static class DBFileStorageImplContextConfiguration {
-
-        @Bean
-        DBFileStorageService dbFileStorageService() {
-            return new DBFileStorageServiceImpl();
-        }
-    }
 
     @Autowired
     DBFileStorageService dbFileStorageService;
 
-    @MockBean
+    @Autowired
     DBFileRepository fileRepository;
 
-    @MockBean
-    @Qualifier("userServicer")
+    @Autowired
     UserService userService;
 
-    @MockBean
+    @Autowired
     CustomUserDetailsService userDetailsService;
 
     String fileName;
